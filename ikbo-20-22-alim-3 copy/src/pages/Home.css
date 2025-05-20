@@ -1,0 +1,50 @@
+/* Home.css */
+
+body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #0d0d0d, #1a1a1a);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #ffffff;
+  }
+  
+  .container {
+    padding: 2rem;
+    max-width: 800px;
+    margin: auto;
+  }
+  
+  .glass-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  }
+  
+  .glass-card h3 {
+    color: #ff4d4d;
+    margin-bottom: 0.5rem;
+  }
+  
+  .glass-card p {
+    color: #cccccc;
+  }
+  
+  button {
+    background-color: #ff4d4d;
+    border: none;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #e60000;
+  }
+  
