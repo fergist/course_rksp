@@ -11,15 +11,22 @@ const LoginForm = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8000/api/token', {
-        username: email,
-        password,
+      const params = new URLSearchParams();
+      params.append('username', email); // email отправляется как "username"
+      params.append('password', password);
+
+      const response = await axios.post('http://localhost:8000/api/token', params, {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
       });
+
       setToken(response.data.access_token);
-      // Предполагается, что backend возвращает userId
-      setUserId(response.data.user_id);
+
+      // можно сделать редирект или перейти на другую страницу
     } catch (error) {
-      console.error('Login error:', error);
+      console.error('Ошибка входа:', error.response?.data || error.message);
+      alert('Неверный логин или пароль');
     }
   };
 

@@ -61,17 +61,17 @@ models.Base.metadata.create_all(bind=engine)
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
 class UserCreate(BaseModel):
-    nickname: str
+    username: str
     email: str
-    password: str
+    password_hash: str
 
 @app.post("/api/register")
 def register(user: UserCreate, db: Session = Depends(get_db)):
     db_user = db.query(User).filter(User.email == user.email).first()
     if db_user:
         raise HTTPException(status_code=400, detail="Email already registered")
-    hashed_password = get_password_hash(user.password)
-    new_user = User(username=user.nickname, email=user.email, password_hash=hashed_password)
+    hashed_password = get_password_hash(user.password_hash)
+    new_user = User(username=user.username, email=user.email, password_hash=hashed_password)
     db.add(new_user)
     db.commit()
     db.refresh(new_user)

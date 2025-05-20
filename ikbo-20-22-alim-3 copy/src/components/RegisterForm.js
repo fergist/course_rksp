@@ -5,18 +5,22 @@ import { AuthContext } from './AuthContext';
 
 const RegisterForm = () => {
   const { setToken, setUserId } = useContext(AuthContext);
-  const [nickname, setNickname] = useState('');
+  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:8000/api/register', { nickname, email, password });
-      const response = await axios.post('http://localhost:8000/api/token', {
-        username: email,
-        password,
-      });
+      const response = await axios.post('http://localhost:8000/api/register', {
+      username: username,
+      email: email,
+      password_hash: password
+    }, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
       setToken(response.data.access_token);
       // Предполагается, что backend возвращает userId
       setUserId(response.data.user_id);
@@ -30,8 +34,8 @@ const RegisterForm = () => {
       <input
         type="text"
         placeholder="Nickname"
-        value={nickname}
-        onChange={(e) => setNickname(e.target.value)}
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
         required
       />
       <input
